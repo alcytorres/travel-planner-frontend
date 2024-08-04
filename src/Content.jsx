@@ -33,6 +33,23 @@ export function Content() {
     setCurrentTrip(trip);
   };
 
+  const handleUpdateTrip = (id, params, successCallback) => {
+    console.log("handleUpdateTrip", params);
+    axios.patch(`http://localhost:3000/trips/${id}.json`, params).then((response) => {
+      setTrips(
+        trips.map((trip) => {
+          if (trip.id === response.data.id) {
+            return response.data;
+          } else {
+            return trip;
+          }
+        })
+      );
+      successCallback();
+      handleClose();
+    });
+  };
+
   const handleClose = () => {
     console.log("handleClose");
     setIsTripsShowVisible(false);
@@ -45,7 +62,7 @@ export function Content() {
       <TripsNew onCreateTrip={handleCreateTrip} />
       <TripsIndex trips={trips} onShowTrip={handleShowTrip} />
       <Modal show={isTripsShowVisible} onClose={handleClose}>
-        <TripsShow trip={currentTrip} />
+        <TripsShow trip={currentTrip} onUpdateTrip={handleUpdateTrip} />
       </Modal>
     </main>
   )
