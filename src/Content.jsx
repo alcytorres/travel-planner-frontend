@@ -36,6 +36,13 @@ export function Content() {
     setCurrentTrip(trip);
   };
 
+  const handleShowAddTrip = (trip) => {
+    console.log(trip);
+    axios.post("http://localhost:3000/user_trips.json", {trip_id: trip.id}).then((response) => {
+      console.log(response.data)
+    })
+  };
+
   const handleUpdateTrip = (id, params, successCallback) => {
     console.log("handleUpdateTrip", params);
     axios.patch(`http://localhost:3000/trips/${id}.json`, params).then((response) => {
@@ -66,7 +73,7 @@ export function Content() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
 
-        <Route path="/" element={<TripsIndex trips={trips} onShowTrip={handleShowTrip}/>} />
+        <Route path="/" element={<TripsIndex trips={trips} onShowTrip={handleShowTrip} onAddTrip={handleShowAddTrip}/>} />
 
         <Route path="/trips/new" element={<TripsNew onCreateTrip={handleCreateTrip} />} />
       </Routes>
