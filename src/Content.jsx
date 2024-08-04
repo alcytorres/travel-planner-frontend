@@ -1,5 +1,8 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Signup } from './Signup';
+import { Login } from './Login';
 import { TripsIndex } from "./TripsIndex";
 import { TripsNew } from "./TripsNew";
 import { TripsShow } from "./TripsShow";
@@ -59,8 +62,15 @@ export function Content() {
 
   return (
     <main>
-      <TripsNew onCreateTrip={handleCreateTrip} />
-      <TripsIndex trips={trips} onShowTrip={handleShowTrip} />
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route path="/" element={<TripsIndex trips={trips} onShowTrip={handleShowTrip}/>} />
+
+        <Route path="/trips/new" element={<TripsNew onCreateTrip={handleCreateTrip} />} />
+      </Routes>
+
       <Modal show={isTripsShowVisible} onClose={handleClose}>
         <TripsShow trip={currentTrip} onUpdateTrip={handleUpdateTrip} />
       </Modal>
