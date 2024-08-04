@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { LogoutLink } from './LogoutLink'
 
 export function Header() {
   return (
     <header>
       <nav>
-        <a href="#">Home</a> | <a href="#">Link</a> | <Link to="/signup">Signup</Link> | <Link to="/login">Login</Link>
+        <a href="/">Home</a> | <a href="/signup">Signup</a> | <a href="/login">Login</a> | <LogoutLink />
       </nav>
     </header>
   )
 }
+
+
