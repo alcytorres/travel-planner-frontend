@@ -11,11 +11,14 @@ import { UserTripsIndex } from "./UserTripsIndex";
 
 export function Content() {
 
+  // Initializes the trips state variable as an empty array to store the list of all trips. setTrips is the function used to update this state.
   const [trips, setTrips] = useState([]);
+  // Initializes the isTripsShowVisible state variable as false. This boolean state controls the visibility of the modal that shows trip details. setIsTripsShowVisible is the function to toggle this visibility.
   const [isTripsShowVisible, setIsTripsShowVisible] = useState(false);
+  // Initializes the currentTrip state variable as an empty object to store information about the currently selected trip. setCurrentTrip is the function to update this state when a trip is selected.
   const [currentTrip, setCurrentTrip] = useState({});
   // Initializes a state variable userTrips with an empty array to store the logged-in user's trips and provides a function setUserTrips to update it.
-  const [userTrips, setUserTrips] = useState([]);  // Added state for user trips
+  const [userTrips, setUserTrips] = useState([]);
   
   const handleIndexTrips = () => {
     console.log("handleIndexTrips");          
