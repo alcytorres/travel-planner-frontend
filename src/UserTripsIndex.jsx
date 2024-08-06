@@ -1,10 +1,12 @@
-export function UserTripsIndex(props) {
+// A React component that displays a list of user trips based on the data passed in as props.
+export function UserTripsIndex(props) {     
   return (
     <div>
-      <h1>All User trips</h1>
-      {props.userTrips.map((trip) => (
-        <div key={trip.id}>
-          <h2>{trip.location}</h2>
+      <h1>All User trips</h1>      
+      {/* Iterate over the userTrips array passed via props in Content.jsx */}
+      {props.userTrips.map((trip) => (    
+        <div key={trip.id}>                 {/* Unique key for each trip, based on trip id. Helps React render the list of trips */}          
+          <h2>{trip.location}</h2>          {/* Display the location of the trip */}
           <img src={trip.image_url} />
           <p>Country: {trip.country}</p>
           <p>Continent: {trip.continent}</p>
