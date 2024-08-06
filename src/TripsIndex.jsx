@@ -12,6 +12,7 @@ export function TripsIndex(props) {
           <p>Latitude: {trip.latitude}</p>
           <p>Longitude: {trip.longitude}</p>
           <p>Highlights: {trip.highlights}</p>
+          <button onClick={() => props.onAddTrip(trip)}>Add to My Trips</button>
           <button onClick={() => props.onShowTrip(trip)}>More info</button>
         </div>
       ))}

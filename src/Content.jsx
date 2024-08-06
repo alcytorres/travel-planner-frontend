@@ -20,6 +20,7 @@ export function Content() {
   // Initializes a state variable userTrips with an empty array to store the logged-in user's trips and provides a function setUserTrips to update it.
   const [userTrips, setUserTrips] = useState([]);
   
+  // Fetches all trips from the backend, logs the response data, and updates the trips state with the fetched list.
   const handleIndexTrips = () => {
     console.log("handleIndexTrips");          
     axios.get("http://localhost:3000/trips.json").then((response) => {
@@ -28,11 +29,11 @@ export function Content() {
     });
   };
 
-  // Defines an arrow function named userTripIndex
+  // Fetches the list of user-specific trips from the backend, logs the response, and updates the userTrips state with the retrieved data.
   const userTripIndex = () => {
   // Logs the string "handleIndexUserTrips" to the console for debugging purposes.
     console.log("handleIndexUserTrips");
-    // Sends a GET request to the URL http://localhost:3000/user_trips.json using axios
+    // Sends a GET request to the URL http://localhost:3000/my_trips.json using axios
     // Begins a chain that executes once the GET request is successful. The response object contains the data returned from the server.
     axios.get("http://localhost:3000/my_trips.json").then((response) => {
     // Logs the data received from the API response to the console.
@@ -42,6 +43,7 @@ export function Content() {
     });
   };
 
+  // Sends a POST request with the given parameters to create a new trip, adds the created trip to the trips state, and calls a success callback function.
   const handleCreateTrip = (params, successCallback) => {
     console.log("handleCreateTrip", params);
     axios.post("http://localhost:3000/trips.json", params).then((response) => {
@@ -50,12 +52,14 @@ export function Content() {
     });
   };
 
+  // Sets the specified trip as the current trip, makes the trip details modal visible, and logs the trip to the console.
   const handleShowTrip = (trip) => {
     console.log("handleShowTrip", trip);
     setIsTripsShowVisible(true);
     setCurrentTrip(trip);
   };
 
+  // Sends a POST request to add the specified trip to the user's trips, logging the trip details and server response to the console.
   const handleShowAddTrip = (trip) => {
     console.log(trip);
     axios.post("http://localhost:3000/user_trips.json", {trip_id: trip.id}).then((response) => {
@@ -63,6 +67,7 @@ export function Content() {
     })
   };
 
+  // Sends a PATCH request with updated parameters to modify an existing trip, updates the trips state with the new trip data, calls a success callback function, and closes the modal.
   const handleUpdateTrip = (id, params, successCallback) => {
     console.log("handleUpdateTrip", params);
     axios.patch(`http://localhost:3000/trips/${id}.json`, params).then((response) => {
@@ -80,6 +85,7 @@ export function Content() {
     });
   };
 
+  // Logs "handleClose" to the console and hides the trip details modal by setting isTripsShowVisible to false.
   const handleClose = () => {
     console.log("handleClose");
     setIsTripsShowVisible(false);
