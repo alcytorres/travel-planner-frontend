@@ -33,9 +33,9 @@ export function Content() {
   const userTripIndex = () => {
   // Logs the string "handleIndexUserTrips" to the console for debugging purposes.
     console.log("handleIndexUserTrips");
-    // Sends a GET request to the URL http://localhost:3000/my_trips.json using axios
+    // Sends a GET request to the URL http://localhost:3000/user_trips.json using axios
     // Begins a chain that executes once the GET request is successful. The response object contains the data returned from the server.
-    axios.get("http://localhost:3000/my_trips.json").then((response) => {
+    axios.get("http://localhost:3000/user_trips.json").then((response) => {
     // Logs the data received from the API response to the console.
       console.log(response.data);
     // Updates the state variable userTrips with the data received from the API, effectively storing the list of user trips fetched from the server.
@@ -91,6 +91,17 @@ export function Content() {
     setIsTripsShowVisible(false);
   };
 
+  const handleDestroyUserTrip = (id) => {
+    console.log("handleDestroyUserTrip", id);
+    axios.delete(`http://localhost:3000/user_trips/${id}.json`).then((response) => {
+      setUserTrips(userTrips.filter((userTrip) => userTrip.id !== id));
+      window.location.href = "/user_trips";
+      handleClose();
+    }).catch((error) => {
+      console.error("There was an error deleting the user trip!", error);
+    });
+  };
+
   useEffect(handleIndexTrips, []);  // All the trips
   useEffect(userTripIndex, []);     // Trips by user
 
@@ -116,7 +127,7 @@ export function Content() {
         <Route path="/trips/new" element={<TripsNew onCreateTrip={handleCreateTrip} />} />
 
 
-        <Route path="/my_trips" element={<UserTripsIndex userTrips={userTrips} onShowTrip={handleShowTrip} />} />
+        <Route path="/user_trips" element={<UserTripsIndex userTrips={userTrips} onShowTrip={handleShowTrip} onDestroyUserTrip={handleDestroyUserTrip} />} />
 
       </Routes>
 

@@ -15,6 +15,8 @@ export function UserTripsIndex(props) {
           <p>Longitude: {trip.longitude}</p>
           <p>Highlights: {trip.highlights}</p>
           <button onClick={() => props.onShowTrip(trip)}>More info</button>
+          {/* trip.usertrip_id:   trip = object   usertrip_id = property I added to the trips jbuilder to pull the id from the UserTrip */}
+          <button onClick={() => props.onDestroyUserTrip(trip.usertrip_id)}>Remove from My Trips</button>
         </div>
       ))}
     </div>
