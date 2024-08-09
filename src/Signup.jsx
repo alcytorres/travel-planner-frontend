@@ -29,7 +29,41 @@ export function Signup() {
           <li key={error}>{error}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} >
+        
+        <div className="mb-3">
+          <label htmlFor="first_name" className="form-label">First name</label>
+          <input type="text" className="form-control" id="first_name" name="first_name" />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="last_name" className="form-label">Last name</label>
+          <input type="text" className="form-control" id="last_name" name="last_name" />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email address</label>
+          <input type="email" className="form-control" id="email" name="email" />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">Password</label>
+          <input type="password" className="form-control" id="password" name="password" />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="password_confirmation" className="form-label">Password confirmation</label>
+          <input type="password" className="form-control" id="password_confirmation" name="password_confirmation" />
+        </div>
+
+        <button type="submit" className="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  );
+}
+
+
+      {/* <form onSubmit={handleSubmit}>
         <div>
           First Name: <input name="first_name" type="text" />
         </div>
@@ -46,7 +80,6 @@ export function Signup() {
           Password confirmation: <input name="password_confirmation" type="password" />
         </div>
         <button type="submit">Signup</button>
-      </form>
-    </div>
-  );
-}
+      </form> */}
+  
+
