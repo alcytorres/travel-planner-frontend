@@ -28,7 +28,7 @@ export function Header() {
                 <li><a className="dropdown-item" href="signup">Signup</a></li>
                 <li><a className="dropdown-item" href="login">Login</a></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#">Logout</a></li>
+                <li className="dropdown-item"><LogoutLink /></li>            
               </ul>
             </li>
             <li className="nav-item">
