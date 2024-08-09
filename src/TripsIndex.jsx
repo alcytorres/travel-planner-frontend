@@ -16,7 +16,7 @@ export function TripsIndex(props) {
                 <p className="card-text">Year: {trip.year}</p>
                 <p className="card-text">Highlights: {trip.highlights}</p>
                 <button className="btn btn-primary" onClick={() => props.onAddTrip(trip)}>Add to Trips</button>
-                <button className="btn btn-primary" onClick={() => props.onShowTrip(trip)}>More Info</button>
+                <button className="btn btn-secondary" onClick={() => props.onShowTrip(trip)}>More Info</button>
               </div>
             </div>
             <br />
