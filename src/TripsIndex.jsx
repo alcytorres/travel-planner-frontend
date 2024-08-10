@@ -1,3 +1,5 @@
+import "./TripsIndex.css";  // Import the CSS file
+
 export function TripsIndex(props) {
   return (
     <div>
@@ -5,7 +7,7 @@ export function TripsIndex(props) {
       <div className="row">
         {props.trips.map((trip) => (
           <div key={trip.id} className="col-sm-4 mb-3 mb-sm-0">
-            <div className="travel card">
+            <div className="trip-card">
             <img src={trip.image_url} className="card-img-top" alt={trip.location} />
               <div className="card-body">
                 <h5 className="card-title">{trip.location}</h5>
