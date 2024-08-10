@@ -1,0 +1,47 @@
+.user-trip-card {
+  display: flex;
+  flex-direction: column;
+  height: 700px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px; /* Adds space between the bottom of each card */
+
+}
+
+.user-trip-card .card-img-top {
+  height: 575px; /* Increase the height for images */
+  width: 100%;
+  object-fit: cover; /* Ensures image covers the space without distortion */
+  display: block;
+}
+
+.user-trip-card .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Start content from the top */
+  flex-grow: 1; /* Allow card body to grow and fill the remaining space */
+  padding: 10px 0; /* Padding inside the card body */
+  line-height: 1; /* Adjust this value to decrease or increase line spacing */
+
+
+}
+
+.user-trip-card .card-title {
+  margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+.user-trip-card .card-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limits text to 3 line */
+  -webkit-box-orient: vertical;
+}
+
+.user-trip-card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; /* Push footer to the bottom */
+}
+
+
+

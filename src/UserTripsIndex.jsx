@@ -1,3 +1,6 @@
+import "./UserTripsIndex.css";  // Import the CSS file
+
+
 // A React component that displays a list of user trips based on the data passed in as props.
 
 export function UserTripsIndex(props) {     
@@ -7,7 +10,7 @@ export function UserTripsIndex(props) {
       <div className="row">
         {props.userTrips.map((trip) => (    
           <div key={trip.id} className="col-sm-4 mb-3 mb-sm-0">   
-            <div className="card user-trip-card">                        
+            <div className="user-trip-card">                        
             <img src={trip.image_url} className="card-img-top" alt={trip.location} />
               <div className="card-body">
                 <h5 className="card-title">{trip.location}</h5>
