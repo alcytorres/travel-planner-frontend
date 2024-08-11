@@ -11,10 +11,10 @@ export function TripsIndex(props) {
             <img src={trip.image_url} className="card-img-top" alt={trip.location} />
               <div className="card-body">
                 <h5 className="card-title">{trip.location}</h5>
-                <p className="card-text">Latitude: {trip.latitude}</p>
-                <p className="card-text">Longitude: {trip.longitude}</p>
+                {/* <p className="card-text">Latitude: {trip.latitude}</p>
+                <p className="card-text">Longitude: {trip.longitude}</p> */}
                 <p className="card-text">Country: {trip.country}</p>
-                <p className="card-text">Continent: {trip.continent}</p>
+                {/* <p className="card-text">Continent: {trip.continent}</p> */}
                 <p className="card-text">Year: {trip.year}</p>
                 <p className="card-text">Highlights: {trip.highlights}</p>
                 <button className="btn btn-primary" onClick={() => props.onAddTrip(trip)}>Add to Trips</button>

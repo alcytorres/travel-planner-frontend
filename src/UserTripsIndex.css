@@ -1,14 +1,14 @@
 .user-trip-card {
   display: flex;
   flex-direction: column;
-  height: 700px;
+  height: 600px;
   border: 1px solid #ddd;
   margin-bottom: 20px; /* Adds space between the bottom of each card */
 
 }
 
 .user-trip-card .card-img-top {
-  height: 575px; /* Increase the height for images */
+  height: 350px; /* Increase the height for images */
   width: 100%;
   object-fit: cover; /* Ensures image covers the space without distortion */
   display: block;
