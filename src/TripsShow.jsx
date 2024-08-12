@@ -12,11 +12,12 @@ export function TripsShow(props) {
       <p>Location: {props.trip.location}</p>
       <p>Latitude: {props.trip.latitude}</p>
       <p>Longitude: {props.trip.longitude}</p>
+      <p>Category: {props.trip.category}</p>
       <p>Country: {props.trip.country}</p>
       <p>Continent: {props.trip.continent}</p>
       <p>Year: {props.trip.year}</p>
       <p>Highlights: {props.trip.highlights}</p>
-      <p>Image url: {props.trip.image_url}</p>
+      {/* <p>Image url: {props.trip.image_url}</p> */}
       <form onSubmit={handleSubmit}>
         <div>
           Location: <input name="location" type="text" />
@@ -26,6 +27,9 @@ export function TripsShow(props) {
         </div>
         <div>
           Longitude: <input name="longitude" type="text" />
+        </div>
+        <div>
+          Category: <input name="category" type="text" />
         </div>
         <div>
           Country: <input name="country" type="text" />

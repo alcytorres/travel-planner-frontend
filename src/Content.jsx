@@ -19,6 +19,11 @@ export function Content() {
   const [currentTrip, setCurrentTrip] = useState({});
   // Initializes a state variable userTrips with an empty array to store the logged-in user's trips and provides a function setUserTrips to update it.
   const [userTrips, setUserTrips] = useState([]);
+
+  const [category, setCategory] = useState('');  // New state for selected category
+  const [yearSortOrder, setYearSortOrder] = useState('');  // New state for year sort order
+  const categories = ["General", "Mountain", "Desert", "Beach"];  // Predefined categories
+
   
   // Fetches all trips from the backend, logs the response data, and updates the trips state with the fetched list.
   const handleIndexTrips = () => {
@@ -40,6 +45,13 @@ export function Content() {
       console.log(response.data);
     // Updates the state variable userTrips with the data received from the API, effectively storing the list of user trips fetched from the server.
       setUserTrips(response.data);
+    });
+  };
+
+   // Function to handle filtering
+   const handleFilterTrips = () => {
+    axios.get('http://localhost:3000/trips.json', { params: { category, year_sort: yearSortOrder } }).then((response) => {
+      setTrips(response.data);
     });
   };
 
@@ -104,10 +116,31 @@ export function Content() {
 
   useEffect(handleIndexTrips, []);  // All the trips
   useEffect(userTripIndex, []);     // Trips by user
+  useEffect(() => {
+    handleFilterTrips();
+  }, [category, yearSortOrder]);  // Trigger filtering whenever category or yearSortOrder changes
+
 
 
   return (
     <main>
+      <div>
+        <label>Filter by Category: </label>
+        <select onChange={(e) => setCategory(e.target.value)} value={category}>
+          <option value="">All Categories</option>
+          {categories.map(cat => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+
+        <label>Sort by Year: </label>
+        <select onChange={(e) => setYearSortOrder(e.target.value)} value={yearSortOrder}>
+          <option value="">None</option>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
+      </div>
+
       <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />

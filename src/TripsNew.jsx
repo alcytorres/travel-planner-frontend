@@ -20,6 +20,9 @@ export function TripsNew(props) {
           Longitude: <input name="longitude" type="text" />
         </div>
         <div>
+          Category: <input name="category" type="text" />
+        </div>
+        <div>
           Country: <input name="country" type="text" />
         </div>
         <div>
