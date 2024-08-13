@@ -1,24 +1,19 @@
 .trip-card {
-  display: flex;
-  flex-direction: column;
-  height: 600px;
-  border: 1px solid #ddd;
+  height: 570px !important; /* Set the height of the card */
+  border: 1px solid #ddd; /* Adds a border around the card */
   margin-bottom: 1px; /* Adds space between the bottom of each card */
-
 }
 
 .trip-card .card-img-top {
-  display: block;
-  height: 350px; /* Increase the height for images */
-  width: 100%;
+  height: 360px; /* Increase the height for images */
+  width: 100%; /* Make the image take up the full width of its container */
   object-fit: cover; /* Ensures image covers the space without distortion */
 }
 
 .trip-card .card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start; /* Start content from the top */
-  flex-grow: 1; /* Allow card body to grow and fill the remaining space */
+  display: flex; /* Set the card to a flexible box layout */
+  flex-direction: column; /* The flexible items are displayed vertically, as a column */
+  /* flex-grow: 1; Allow card body to grow and fill the remaining space */
   padding: 10px 0; /* Padding inside the card body */
   line-height: 1; /* Adjust this value to decrease or increase line spacing */
 }
@@ -30,20 +25,21 @@
 .trip-card .card-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* Limits text to 2 line */
-  flex-grow: 1; /* Ensure text takes up available space */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 15px; /* Add space between text and footer */
+  -webkit-line-clamp: 2;  /* Limits text to 2 line */
+  flex-grow: 1;  /* Ensure text takes up available space */
+  overflow: hidden;  /* Hide any text that overflows the container */
+  text-overflow: ellipsis;  /* Add an ellipsis (...) to indicate overflowing text */
+  margin-bottom: 17px;  /* Add space between text and footer */
 }
 
 .trip-card .card-footer {
-  display: flex;
   margin-top: auto; /* Push footer to the bottom */
-  justify-content: space-between;
 }
 
-.trip-card .btn {
-  margin-bottom: 0; /* Remove margin at the bottom of the button */
-  padding-bottom: 0.75rem; /* Adjust padding if needed */
+.trip-card .btn.btn-primary {
+  padding-bottom: 0.53rem; 
+}
+
+.trip-card .btn.btn-secondary {
+  padding-bottom: 0.53rem; 
 }

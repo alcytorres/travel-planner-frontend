@@ -16,9 +16,9 @@ export function UserTripsIndex(props) {
                 <h5 className="card-title">{trip.location}</h5>
                 {/* <p className="card-text">Latitude: {trip.latitude}</p>
                 <p className="card-text">Longitude: {trip.longitude}</p> */}
-                <p className="card-text">Country: {trip.country}</p>
+                {/* <p className="card-text">Country: {trip.country}</p> */}
                 {/* <p className="card-text">Continent: {trip.continent}</p> */}
-                <p className="card-text">Year: {trip.year}</p>
+                <p className="card-text">Year: {trip.year}</p>  
                 <p className="card-text">Highlights: {trip.highlights}</p>
                 <button className="btn btn-primary" onClick={() => props.onShowTrip(trip)}>More Info</button>
                 <button className="btn btn-danger" onClick={() => props.onDestroyUserTrip(trip.usertrip_id)}>Remove trip</button>

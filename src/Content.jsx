@@ -53,8 +53,14 @@ export function Content() {
 
   // Function to handle filtering
   const handleFilterTrips = () => {
-    axios.get('http://localhost:3000/trips.json', { params: { category, year_sort: yearSortOrder } }).then((response) => {
-      setTrips(response.data);
+    const url = location.pathname === "/user_trips" ? 'http://localhost:3000/user_trips.json' : 'http://localhost:3000/trips.json';
+  
+    axios.get(url, { params: { category, year_sort: yearSortOrder } }).then((response) => {
+      if (location.pathname === "/user_trips") {
+        setUserTrips(response.data);
+      } else {
+        setTrips(response.data);
+      }
     });
   };
 
@@ -119,17 +125,38 @@ export function Content() {
 
   useEffect(handleIndexTrips, []);  // All the trips
   useEffect(userTripIndex, []);     // Trips by user
-  
+
   useEffect(() => {
     handleFilterTrips();
-  }, [category, yearSortOrder]);  // Trigger filtering whenever category or yearSortOrder changes
-
-
+  }, [category, yearSortOrder, location.pathname]);  // Trigger filtering whenever category, yearSortOrder, or path changes
+  
 
   return (
     <main>
-      {/* Conditionally render the filters only on the TripsIndex page */}
+      {/* Conditionally render the Category filter on the TripsIndex page */}
       {location.pathname === "/" && (
+        <div className="container mt-2">
+          <div className="row mb-2">
+            <div className="col-md-12">
+              <label htmlFor="categorySelect" className="form-label">Filter by Category:</label>
+              <select
+                id="categorySelect"
+                className="form-select"
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+              >
+                <option value="">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Conditionally render both Category and Year Sort filters on the UserTripsIndex page */}
+      {location.pathname === "/user_trips" && (
         <div className="container mt-2">
           <div className="row mb-2">
             <div className="col-md-6">
