@@ -9,6 +9,7 @@ import { TripsShow } from "./TripsShow";
 import { Modal } from "./Modal";
 import { UserTripsIndex } from "./UserTripsIndex";
 
+
 export function Content() {
 
   // Initializes the trips state variable as an empty array to store the list of all trips. setTrips is the function used to update this state.
@@ -136,8 +137,8 @@ export function Content() {
       {/* Conditionally render the Category filter on the TripsIndex page */}
       {location.pathname === "/" && (
         <div className="container mt-2">
-          <div className="row mb-2">
-            <div className="col-md-12">
+          <div className="row justify-content-center mb-2">
+            <div className="col-md-6 filter-container">
               <label htmlFor="categorySelect" className="form-label">Filter by Category:</label>
               <select
                 id="categorySelect"
