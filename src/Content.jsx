@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { Signup } from './Signup';
 import { Login } from './Login';
 import { TripsIndex } from "./TripsIndex";
@@ -48,8 +48,11 @@ export function Content() {
     });
   };
 
-   // Function to handle filtering
-   const handleFilterTrips = () => {
+  // Get the current location (route)
+  const location = useLocation();
+
+  // Function to handle filtering
+  const handleFilterTrips = () => {
     axios.get('http://localhost:3000/trips.json', { params: { category, year_sort: yearSortOrder } }).then((response) => {
       setTrips(response.data);
     });
@@ -116,6 +119,7 @@ export function Content() {
 
   useEffect(handleIndexTrips, []);  // All the trips
   useEffect(userTripIndex, []);     // Trips by user
+  
   useEffect(() => {
     handleFilterTrips();
   }, [category, yearSortOrder]);  // Trigger filtering whenever category or yearSortOrder changes
@@ -124,37 +128,40 @@ export function Content() {
 
   return (
     <main>
-      <div className="container mt-2">
-        <div className="row mb-2">
-          <div className="col-md-6">
-            <label htmlFor="categorySelect" className="form-label">Filter by Category:</label>
-            <select
-              id="categorySelect"
-              className="form-select"
-              onChange={(e) => setCategory(e.target.value)}
-              value={category}
-            >
-              <option value="">All Categories</option>
-              {categories.map(cat => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
-          </div>
-          <div className="col-md-6">
-            <label htmlFor="yearSortSelect" className="form-label">Sort by Year:</label>
-            <select
-              id="yearSortSelect"
-              className="form-select"
-              onChange={(e) => setYearSortOrder(e.target.value)}
-              value={yearSortOrder}
-            >
-              <option value="">None</option>
-              <option value="asc">Ascending</option>
-              <option value="desc">Descending</option>
-            </select>
+      {/* Conditionally render the filters only on the TripsIndex page */}
+      {location.pathname === "/" && (
+        <div className="container mt-2">
+          <div className="row mb-2">
+            <div className="col-md-6">
+              <label htmlFor="categorySelect" className="form-label">Filter by Category:</label>
+              <select
+                id="categorySelect"
+                className="form-select"
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+              >
+                <option value="">All Categories</option>
+                {categories.map(cat => (
+                  <option key={cat} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="yearSortSelect" className="form-label">Sort by Year:</label>
+              <select
+                id="yearSortSelect"
+                className="form-select"
+                onChange={(e) => setYearSortOrder(e.target.value)}
+                value={yearSortOrder}
+              >
+                <option value="">None</option>
+                <option value="asc">Ascending</option>
+                <option value="desc">Descending</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <Routes>
         <Route path="/signup" element={<Signup />} />
