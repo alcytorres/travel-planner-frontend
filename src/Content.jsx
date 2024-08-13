@@ -124,21 +124,36 @@ export function Content() {
 
   return (
     <main>
-      <div>
-        <label>Filter by Category: </label>
-        <select onChange={(e) => setCategory(e.target.value)} value={category}>
-          <option value="">All Categories</option>
-          {categories.map(cat => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
-
-        <label>Sort by Year: </label>
-        <select onChange={(e) => setYearSortOrder(e.target.value)} value={yearSortOrder}>
-          <option value="">None</option>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+      <div className="container mt-2">
+        <div className="row mb-2">
+          <div className="col-md-6">
+            <label htmlFor="categorySelect" className="form-label">Filter by Category:</label>
+            <select
+              id="categorySelect"
+              className="form-select"
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
+            >
+              <option value="">All Categories</option>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="yearSortSelect" className="form-label">Sort by Year:</label>
+            <select
+              id="yearSortSelect"
+              className="form-select"
+              onChange={(e) => setYearSortOrder(e.target.value)}
+              value={yearSortOrder}
+            >
+              <option value="">None</option>
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <Routes>
