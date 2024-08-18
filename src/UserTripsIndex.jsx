@@ -21,7 +21,10 @@ export function UserTripsIndex(props) {
                 <p className="card-text">Year: {trip.year}</p>  
                 <p className="card-text">Highlights: {trip.highlights}</p>
                 <button className="btn btn-primary" onClick={() => props.onShowTrip(trip)}>More Info</button>
-                <button className="btn btn-danger" onClick={() => props.onDestroyUserTrip(trip.usertrip_id)}>Remove trip</button>
+
+                {/* <button className="btn btn-danger" onClick={() => props.onDestroyUserTrip(trip.usertrip_id)}>Remove trip</button> */}
+                <button className="btn btn-danger" onClick={() => props.onDestroyUserTrip(trip.usertrip_id, trip)}>Remove trip</button>
+
               </div>
             </div>
             <br />

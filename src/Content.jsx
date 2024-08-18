@@ -37,16 +37,18 @@ export function Content() {
 
   // Fetches the list of user-specific trips from the backend, logs the response, and updates the userTrips state with the retrieved data.
   const userTripIndex = () => {
-  // Logs the string "handleIndexUserTrips" to the console for debugging purposes.
-    console.log("handleIndexUserTrips");
+    // handleFilterTrips();  // Use the handleFilterTrips function to apply filtering and sorting logic
+
+    // Logs the string "userTripIndex" to the console for debugging purposes.
+    // console.log("userTripIndex");
     // Sends a GET request to the URL http://localhost:3000/user_trips.json using axios
     // Begins a chain that executes once the GET request is successful. The response object contains the data returned from the server.
-    axios.get("http://localhost:3000/user_trips.json").then((response) => {
+    // axios.get("http://localhost:3000/user_trips.json").then((response) => {
     // Logs the data received from the API response to the console.
-      console.log(response.data);
+      // console.log(response.data);
     // Updates the state variable userTrips with the data received from the API, effectively storing the list of user trips fetched from the server.
-      setUserTrips(response.data);
-    });
+    //   setUserTrips(response.data);
+    // });
   };
 
   // Get the current location (route)
@@ -57,6 +59,7 @@ export function Content() {
     const url = location.pathname === "/user_trips" ? 'http://localhost:3000/user_trips.json' : 'http://localhost:3000/trips.json';
   
     axios.get(url, { params: { category, year_sort: yearSortOrder } }).then((response) => {
+      console.log("Filtered/Sorted Data:", response.data); // Log the data returned from the backend
       if (location.pathname === "/user_trips") {
         setUserTrips(response.data);
       } else {
@@ -64,6 +67,19 @@ export function Content() {
       }
     });
   };
+
+  // Delete this once you understand it 
+  // const handleFilterTrips = () => {
+  //   const url = location.pathname === "/user_trips" ? 'http://localhost:3000/user_trips.json' : 'http://localhost:3000/trips.json';
+  
+  //   axios.get(url, { params: { category, year_sort: yearSortOrder } }).then((response) => {
+  //     if (location.pathname === "/user_trips") {
+  //       setUserTrips(response.data);
+  //     } else {
+  //       setTrips(response.data);
+  //     }
+  //   });
+  // };
 
   // Sends a POST request with the given parameters to create a new trip, adds the created trip to the trips state, and calls a success callback function.
   const handleCreateTrip = (params, successCallback) => {
@@ -81,11 +97,16 @@ export function Content() {
     setCurrentTrip(trip);
   };
 
-  // Sends a POST request to add the specified trip to the user's trips, logging the trip details and server response to the console.
+
+  // This function adds a selected trip to the user's list, removes it from the available trips, and updates both lists accordingly.
   const handleShowAddTrip = (trip) => {
     console.log(trip);
     axios.post("http://localhost:3000/user_trips.json", {trip_id: trip.id}).then((response) => {
-      console.log(response.data)
+      // Remove the trip from the trips state
+      setTrips(trips.filter(t => t.id !== trip.id));
+      // Add the trip to the userTrips state
+      setUserTrips([...userTrips, response.data]);
+        console.log(response.data)
     })
   };
 
@@ -113,16 +134,27 @@ export function Content() {
     setIsTripsShowVisible(false);
   };
 
-  const handleDestroyUserTrip = (id) => {
-    console.log("handleDestroyUserTrip", id);
-    axios.delete(`http://localhost:3000/user_trips/${id}.json`).then((response) => {
-      setUserTrips(userTrips.filter((userTrip) => userTrip.id !== id));
-      window.location.href = "/user_trips";
-      handleClose();
-    }).catch((error) => {
-      console.error("There was an error deleting the user trip!", error);
+  // This function removes a selected trip from the user's list, adds it back to the available trips, and updates both lists accordingly.
+  const handleDestroyUserTrip = (userTripId, trip) => {
+    console.log("handleDestroyUserTrip", userTripId);
+    axios.delete(`http://localhost:3000/user_trips/${userTripId}.json`).then((response) => {
+      // Remove the trip from the userTrips state
+      setUserTrips(userTrips.filter(ut => ut.usertrip_id !== userTripId));
+      // Add the trip back to the trips state
+      setTrips([...trips, trip]);
     });
   };
+
+  // const handleDestroyUserTrip = (id) => {
+  //   console.log("handleDestroyUserTrip", id);
+  //   axios.delete(`http://localhost:3000/user_trips/${id}.json`).then((response) => {
+  //     setUserTrips(userTrips.filter((userTrip) => userTrip.id !== id));
+  //     window.location.href = "/user_trips";
+  //     handleClose();
+  //   }).catch((error) => {
+  //     console.error("There was an error deleting the user trip!", error);
+  //   });
+  // };
 
   useEffect(handleIndexTrips, []);  // All the trips
   useEffect(userTripIndex, []);     // Trips by user
